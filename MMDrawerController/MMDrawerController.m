@@ -248,6 +248,7 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
 #pragma mark - Open/Close methods
 -(void)toggleDrawerSide:(MMDrawerSide)drawerSide animated:(BOOL)animated completion:(void (^)(BOOL finished))completion{
     NSParameterAssert(drawerSide!=MMDrawerSideNone);
+    [self.centerViewController.view endEditing:true];
     if(self.openSide == MMDrawerSideNone){
         [self openDrawerSide:drawerSide animated:animated completion:completion];
     }
@@ -1059,6 +1060,8 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
                 break;
             }
             else {
+                // hide keyboard when pan gesture start
+                [self.centerViewController.view endEditing:true];
                 self.startingPanRect = self.centerContainerView.frame;
             }
         }
